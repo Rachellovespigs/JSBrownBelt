@@ -1,0 +1,23 @@
+body {
+  background-image: url(LightBackground.jpg);
+  text-align: center;
+  color: white;
+  text-shadow: 4px 3px 4px rgb(169, 216, 255);
+  font-size: 34px;
+  font-family: fantasy;
+}
+
+canvas {
+  background: url(BobaShop.jpeg);
+  background-size: cover;
+}
+
+.left {
+  float: left;
+  font-family: sans-serif;
+}
+
+.right {
+  float: right;
+  font-family: sans-serif;
+}
