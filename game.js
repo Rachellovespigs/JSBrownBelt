@@ -67,6 +67,24 @@ function update() {
     score += 5;
   }
 
+  if (
+    checkCollisions(
+      cannonSize,
+      cannonSize,
+      cannonX,
+      cannonY,
+      BadWidth,
+      BadHeight,
+      BadX,
+      BadY
+    )
+  ) {
+    BadY = 0;
+    BadX = Math.random() * 800;
+
+    score += 5;
+  }
+
   drawScore();
 }
 
