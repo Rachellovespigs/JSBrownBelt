@@ -2,10 +2,16 @@ var canvas;
 var ctx;
 
 var x, y, width, height;
-x = 10;
-y = 10;
+x = 350;
+y = 500;
 width = 50;
 height = 50;
+
+var BadX, badY, BadWidth, BadHeight;
+BadX = 0;
+BadY = 0;
+BadWidth = 20;
+BadHeight = 20;
 
 var keys = [];
 
@@ -27,8 +33,54 @@ function startGame() {
 function update() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+  moveGoodGuy();
+  moveBadGuy();
+
+  if (checkCollisions(width, height, x, y, BadWidth, BadHeight, BadX, BadY)) {
+    BadY = 0;
+    BadX = Math.random() * 800;
+  }
+}
+
+function moveGoodGuy() {
+  if (keys["ArrowRight"] == true) x += 20;
+
+  if (keys["ArrowLeft"] == true) x -= 20;
+
+  ctx.fillStyle = "blue";
+  ctx.fillRect(BadX, BadY, BadWidth, BadHeight);
+}
+
+function moveBadGuy() {
   ctx.fillStyle = "blue";
   ctx.fillRect(x, y, width, height);
 
-  if (keys["ArrowRight"] == true) x += 10;
+  BadY += 25;
+
+  if (BadY > 800) {
+    BadY = 0;
+    BadX = Math.random() * 800;
+  }
+}
+
+function checkCollisions(
+  rect1Width,
+  rect1Height,
+  rect1XPos,
+  rect1YPos,
+  rect2Width,
+  rect2Height,
+  rect2XPos,
+  rect2YPos
+) {
+  if (
+    rect1XPos < rect2XPos + rect2Width &&
+    rect1XPos + rect1Width > rect2XPos &&
+    rect1YPos < rect2YPos + rect2Height &&
+    rect1Height + rect1YPos > rect2YPos
+  ) {
+    return true;
+  } else {
+    return false;
+  }
 }
