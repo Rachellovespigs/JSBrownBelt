@@ -1,17 +1,23 @@
 var canvas;
 var ctx;
 
+var PigBobaImage = new Image();
+PigBobaImage.src = "PigDrinkingBoba.png";
+
+var BobaImage = new Image();
+BobaImage.src = "BOBA.png";
+
 var x, y, width, height;
 x = 350;
 y = 500;
-width = 50;
-height = 50;
+width = 70;
+height = 70;
 
 var BadX, badY, BadWidth, BadHeight;
 BadX = 0;
 BadY = 0;
-BadWidth = 20;
-BadHeight = 20;
+BadWidth = 50;
+BadHeight = 50;
 
 var keys = [];
 
@@ -47,13 +53,11 @@ function moveGoodGuy() {
 
   if (keys["ArrowLeft"] == true) x -= 20;
 
-  ctx.fillStyle = "blue";
-  ctx.fillRect(BadX, BadY, BadWidth, BadHeight);
+  ctx.drawImage(PigBobaImage, x, y, width, height);
 }
 
 function moveBadGuy() {
-  ctx.fillStyle = "blue";
-  ctx.fillRect(x, y, width, height);
+  ctx.drawImage(BobaImage, BadX, BadY, BadWidth, BadHeight);
 
   BadY += 25;
 
