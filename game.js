@@ -7,6 +7,9 @@ PigBobaImage.src = "PigDrinkingBoba.png";
 var BobaImage = new Image();
 BobaImage.src = "BOBA.png";
 
+var CatcherImage = new Image();
+CatcherImage.src = "BobaCup.jpeg";
+
 var x, y, width, height;
 x = 350;
 y = 500;
@@ -30,7 +33,7 @@ cannonX = cannonY = 0;
 var cannonCooldown = 0;
 var cannonCooldownDelay = 30;
 var cannonSpeed = 20;
-var cannonSize = 20;
+var cannonSize = 40;
 
 var keys = [];
 var score = 0;
@@ -137,8 +140,8 @@ function handleCannon() {
 
   cannonY -= cannonSpeed;
 
-  ctx.fillStyle = "Black";
-  ctx.fillRect(cannonX, cannonY, cannonSize, cannonSize);
+  // ctx.fillStyle = "Black";
+  ctx.drawImage(CatcherImage, cannonX, cannonY, cannonSize, cannonSize);
 }
 
 function drawScore() {
