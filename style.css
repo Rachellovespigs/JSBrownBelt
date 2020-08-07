@@ -8,16 +8,13 @@ body {
 }
 
 canvas {
-  background: url(BobaShop.jpeg);
+  background: url(BobaBackground.jpg);
   background-size: cover;
+  border: 7px solid rgb(63, 63, 134);
 }
 
 .left {
   float: left;
   font-family: sans-serif;
-}
-
-.right {
-  float: right;
-  font-family: sans-serif;
+  font-size: 18px;
 }

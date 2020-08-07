@@ -19,6 +19,19 @@ BadY = 0;
 BadWidth = 50;
 BadHeight = 50;
 
+var backgroundImage = new Image();
+backgroundImage.src = "BobaBackground.jpg";
+var backgroundX, backgroundY;
+backgroundX = backgroundY = 0;
+var backgroundSpeed = 2;
+
+var cannonX, cannonY;
+cannonX = cannonY = 0;
+var cannonCooldown = 0;
+var cannonCooldownDelay = 30;
+var cannonSpeed = 20;
+var cannonSize = 20;
+
 var keys = [];
 var score = 0;
 
@@ -34,13 +47,17 @@ function startGame() {
   canvas = document.getElementById("gc");
   ctx = canvas.getContext("2d");
 
-  window.setInterval(update, 100);
+  var fps = 1000 / 30;
+
+  window.setInterval(update, fps);
 }
 
 function update() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawBackground();
 
   moveGoodGuy();
+  handleCannon();
   moveBadGuy();
 
   if (checkCollisions(width, height, x, y, BadWidth, BadHeight, BadX, BadY)) {
@@ -53,10 +70,29 @@ function update() {
   drawScore();
 }
 
-function moveGoodGuy() {
-  if (keys["ArrowRight"] == true && x <= 750) x += 20;
+function drawBackground() {
+  backgroundX -= backgroundSpeed;
+  if (backgroundX < -canvas.width) backgroundX = 0;
+  ctx.drawImage(
+    backgroundImage,
+    backgroundX,
+    backgroundY,
+    canvas.width,
+    canvas.height
+  );
+  ctx.drawImage(
+    backgroundImage,
+    backgroundX + canvas.width,
+    backgroundY,
+    canvas.width,
+    canvas.height
+  );
+}
 
-  if (keys["ArrowLeft"] == true && x >= 0) x -= 20;
+function moveGoodGuy() {
+  if (keys["ArrowRight"] == true && x <= 750) x += 10;
+
+  if (keys["ArrowLeft"] == true && x >= 0) x -= 10;
 
   ctx.drawImage(PigBobaImage, x, y, width, height);
 }
@@ -64,7 +100,7 @@ function moveGoodGuy() {
 function moveBadGuy() {
   ctx.drawImage(BobaImage, BadX, BadY, BadWidth, BadHeight);
 
-  BadY += 25;
+  BadY += 10;
 
   if (BadY > 800) {
     BadY = 0;
@@ -72,8 +108,23 @@ function moveBadGuy() {
   }
 }
 
+function handleCannon() {
+  if (keys[" "] && cannonCooldown <= 0) {
+    cannonX = x + width / 2 - cannonSize / 2;
+    cannonY = y;
+    cannonCooldown = cannonCooldownDelay;
+  }
+
+  --cannonCooldown;
+
+  cannonY -= cannonSpeed;
+
+  ctx.fillStyle = "Black";
+  ctx.fillRect(cannonX, cannonY, cannonSize, cannonSize);
+}
+
 function drawScore() {
-  ctx.fillStyle = "white";
+  ctx.fillStyle = "black";
   ctx.font = "Arial 100px";
   ctx.fillText("Score: " + score, 10, 10);
 }
