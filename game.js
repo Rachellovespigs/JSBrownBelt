@@ -20,6 +20,7 @@ BadWidth = 50;
 BadHeight = 50;
 
 var keys = [];
+var score = 0;
 
 window.onkeydown = function (event) {
   keys[event.key] = true;
@@ -45,13 +46,17 @@ function update() {
   if (checkCollisions(width, height, x, y, BadWidth, BadHeight, BadX, BadY)) {
     BadY = 0;
     BadX = Math.random() * 800;
+
+    score += 5;
   }
+
+  drawScore();
 }
 
 function moveGoodGuy() {
-  if (keys["ArrowRight"] == true) x += 20;
+  if (keys["ArrowRight"] == true && x <= 750) x += 20;
 
-  if (keys["ArrowLeft"] == true) x -= 20;
+  if (keys["ArrowLeft"] == true && x >= 0) x -= 20;
 
   ctx.drawImage(PigBobaImage, x, y, width, height);
 }
@@ -65,6 +70,12 @@ function moveBadGuy() {
     BadY = 0;
     BadX = Math.random() * 800;
   }
+}
+
+function drawScore() {
+  ctx.fillStyle = "white";
+  ctx.font = "Arial 100px";
+  ctx.fillText("Score: " + score, 10, 10);
 }
 
 function checkCollisions(
