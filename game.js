@@ -2,10 +2,10 @@ var canvas;
 var ctx;
 
 var PigBobaImage = new Image();
-PigBobaImage.src = "PigDrinkingBoba.png";
+PigBobaImage.src = "WalmartBag.jpeg";
 
 var BobaImage = new Image();
-BobaImage.src = "BOBA.png";
+BobaImage.src = "Fruits.png";
 
 var CatcherImage = new Image();
 CatcherImage.src = "BobaCup.jpeg";
